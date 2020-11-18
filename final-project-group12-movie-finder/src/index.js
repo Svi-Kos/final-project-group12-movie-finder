@@ -31,6 +31,7 @@ mainEl.insertAdjacentHTML('beforeend', mainMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
 modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
+<<<<<<< Updated upstream
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
   dataContainer: document.querySelector('.js-data-container'),
@@ -52,3 +53,10 @@ function onSearch(event) {
 function onLoadMore() {
   moviesApiService.fetchMovies();
 }
+=======
+fetch(
+  'https://api.themoviedb.org/3/movie/550?api_key=14d97542ae4a62e821967220e1ab473a',
+)
+  .then(r => r.json())
+  .then(console.log);
+>>>>>>> Stashed changes
