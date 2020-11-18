@@ -1,4 +1,4 @@
-/* *,
+*,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -15,7 +15,6 @@ body {
   color: FFFFFF;
   margin: auto;
 }
-
 
 h1,
 h2,
@@ -34,8 +33,6 @@ img {
   display: block;
 }
 
-
-
 img {
   display: block;
   max-width: 100%;
@@ -44,6 +41,4 @@ img {
 
 ul {
   list-style: none;
-
-  
 }
