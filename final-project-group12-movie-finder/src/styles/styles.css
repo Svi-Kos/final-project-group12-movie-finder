@@ -9,11 +9,19 @@ ol {
   padding: 0;
 }
 
-body,
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.2;
+  color: FFFFFF;
+  margin: auto;
+}
+
+
 h1,
 h2,
 h3,
 h4,
+h5,
 p,
 ul,
 ol,
@@ -26,3 +34,16 @@ img {
   display: block;
 }
 
+
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+
+  
+}
