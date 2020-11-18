@@ -1,10 +1,10 @@
-// import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 import './styles/styles.css';
 import './styles/stylesForHeader.css';
 import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
-// import ApiService from './js/apiService';
+import ApiService from './js/apiService';
 // import getRefs from './js/refs';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
@@ -30,3 +30,25 @@ headerEl.insertAdjacentHTML('beforeend', headerMarkup);
 mainEl.insertAdjacentHTML('beforeend', mainMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
 modalEl.insertAdjacentHTML('beforeend', modalMarkup);
+
+const refs = {
+  searchForm: document.querySelector('.js-search-form'),
+  dataContainer: document.querySelector('.js-data-container'),
+  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
+};
+
+const moviesApiService = new ApiService();
+
+refs.searchForm.addEventListener('input', debounce(onSearch, 500));
+refs.loadMoreBtn.addEventListener('click', onLoadMore);
+
+function onSearch(event) {
+  const form = event.target;
+  moviesApiService.query = form.value;
+  moviesApiService.resetPage();
+  moviesApiService.fetchMovies();
+}
+
+function onLoadMore() {
+  moviesApiService.fetchMovies();
+}
