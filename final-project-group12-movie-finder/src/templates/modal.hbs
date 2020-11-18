@@ -1,1 +1,38 @@
 <div>розмітка modal</div>
+<div class="container">
+    <div class="modal">
+        <img class="card-poster" src="https://image.tmdb.org/t/p/w400/betExZlgK0l7CZ9CsCBVcwO1OjL.jpg" alt="poster">
+
+        <div class="card-details">
+            <h2 class="card-title">{{original_title}}Original Title</h2>
+            <ul class="card-list">
+                <li class="card-item">
+                    <p class="card-item__about">Vote / Votes</p>
+                    <p><span class="vote">{{vote_average}}10</span> / {{vote_count}}21345</p>
+                </li>
+                <li class="card-item">
+                    <p class="card-item__about">Popularity</p>
+                    <p>{{popularity}}123456</p>
+                </li>
+                <li class="card-item">
+                    <p class="card-item__about">Original Title</p>
+                    <p>{{original_title}}Original Title</p>
+                </li>
+                <li class="card-item">
+                    <p class="card-item__about">Genre</p>
+                    <p>{{genres.name}}Genre</p>
+                    {{!-- {{#each genres}}
+                     <p>{{name}}Genre</p>
+                    {{/each}} --}}
+                </li>
+            </ul>
+            <h3 class="card-about">About</h3>
+            <p class="card-description">{{overview}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio esse
+                officiis labore obcaecati qui, delectus ut quam dolor mollitia atque culpa sed sunt nostrum excepturi
+                recusandae porro beatae nesciunt dolorem.</p>
+
+        </div>
+        <button class="button button-watched" type="button">add to watched</button>
+        <button class="button button-queue" type="button">add to queue</button>
+    </div>
+</div>
