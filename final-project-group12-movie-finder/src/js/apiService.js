@@ -10,8 +10,20 @@ export default class ApiService {
       .then(r => r.json())
       .then(({ results }) => {
         this.incrementPage();
+<<<<<<< Updated upstream
         results.length = this.resultsPerPage;
 
+=======
+        // if (this.searchQuery === 'hello') {
+        //   results.length = this.resultsPerDesctopPage;
+        // } else if (this.searchQuery === 'sun') {
+        //   results.length = this.resultsPerTabletPage;
+        // } else {
+        //   results.length = this.resultsPerMobilePage;
+        // }
+        results.length = this.resultsPerPage;
+        this.resultsPerPage = 12;
+>>>>>>> Stashed changes
         return results;
       });
   }

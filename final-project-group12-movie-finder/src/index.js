@@ -5,7 +5,7 @@ import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
 import ApiService from './js/apiService';
-import cardFilmTpl from './templates/card-film.hbs'
+import cardFilmTpl from './templates/card-film.hbs';
 // import getRefs from './js/refs';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
@@ -48,7 +48,6 @@ function onSearch(event) {
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
   moviesApiService.fetchMovies().then(appendFilms);
-    
 }
 
 function onLoadMore() {
@@ -56,5 +55,5 @@ function onLoadMore() {
 }
 function appendFilms(results) {
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
-
+  console.log(refs.dataContainer.offsetWidth);
 }
