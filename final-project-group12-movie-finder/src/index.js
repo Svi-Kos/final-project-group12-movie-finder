@@ -49,7 +49,6 @@ function onSearch(event) {
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
   moviesApiService.fetchMovies().then(appendFilms);
-    
 }
 
 function onLoadMore() {
@@ -57,5 +56,5 @@ function onLoadMore() {
 }
 function appendFilms(results) {
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
-
+  console.log(refs.dataContainer.offsetWidth);
 }
