@@ -1,120 +1,119 @@
-main{
-    display: block;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    margin: 0 auto;
-
+main {
+  display: block;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-    main{
+  main {
     max-width: 320px;
     margin: 0 auto;
-    }
+  }
 }
 
 @media screen and (min-width: 768px) {
-    main{
+  main {
     max-width: 768px;
     margin: 0 auto;
-    }
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    main{
+  main {
     max-width: 1024px;
     margin: 0 auto;
-    }
+  }
 }
 
-
-.main-container__list{
-    display: flex;
-    margin: -15px;
-    flex-wrap: wrap;
-    justify-content: center;
+.main-container__list,
+.js-data-container {
+  display: flex;
+  margin: -15px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media screen and (max-width: 767px) {
-    .main-container__list{
+  .main-container__list {
     max-width: 320px;
     margin: 0;
-    }
+  }
 }
 
-.list__element{
-    width: 274px;
-    height: 100%;
-    margin: 15px;
+.list__element {
+  width: 274px;
+  height: 100%;
+  margin: 15px;
 }
 
 @media screen and (max-width: 767px) {
-    .list__element{
+  .list__element {
     width: 280px;
-    }
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .list__element{
+  .list__element {
     width: 294px;
-    }
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    .list__element{
+  .list__element {
     width: 274px;
-    }
+  }
 }
 
-.element__photo{
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
+.element__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
 }
 
-.element__name{
-    margin-bottom: 5px;
+.element__name {
+  margin-bottom: 5px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
-    text-transform: uppercase;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
 
-    color: #000000;
+  color: #000000;
 }
 
-.element__genres-and-rating{
-    display: flex;
+.element__genres-and-rating {
+  display: flex;
 }
 
-.element__genres{
-    margin-right: 10px;
+.element__genres {
+  margin-right: 10px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
 
-    color: #FF6B01;
+  color: #ff6b01;
 }
 
-.element__rating{
-    display: inline;
-    width: 36px;
-    border-radius: 5px;
+.element__rating {
+  display: inline;
+  width: 36px;
+  border-radius: 5px;
 
-    padding: 1px 6px;
+  padding: 1px 6px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
 
-    color: #ffffff;
-    background-color: #FF6B01;
+  color: #ffffff;
+  background-color: #ff6b01;
 }
