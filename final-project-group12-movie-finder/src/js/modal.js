@@ -1,7 +1,8 @@
 
 const openedModal = document.querySelector('.main')
 const modal = document.querySelector('.modal')
-console.log(openedModal)
+const body = document.querySelector('body')
+console.log(body)
 openedModal.addEventListener("click", openModal);
 
 export function openModal(event) {
@@ -9,11 +10,9 @@ export function openModal(event) {
     return;
   } else {
 
-      modal.classList.remove("is-hidden")
+    modal.classList.remove("is-hidden")
+    body.classList.add("body")
       console.log('re')
-      window.addEventListener('scroll', (e) => {
-  window.scrollTo(0,0);
-});
   }
 }
 
@@ -37,6 +36,7 @@ function onOverlaykey(evt) {
 
 function closeModal() {
   modal.classList.add("is-hidden");
+  body.classList.remove("body")
     modalImg.src = ``;
     
 }

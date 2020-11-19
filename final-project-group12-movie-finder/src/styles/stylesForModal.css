@@ -13,6 +13,10 @@
   pointer-events: none;
 }
 
+.body {
+  overflow: hidden;
+}
+
 .modal-window {
   position: absolute;
   top: 50%;
