@@ -5,6 +5,7 @@ import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
 import ApiService from './js/apiService';
+import './js/modal'
 import cardFilmTpl from './templates/card-film.hbs'
 // import getRefs from './js/refs';
 import header from './partials/header.hbs';
