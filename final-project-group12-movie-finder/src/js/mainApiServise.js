@@ -10,8 +10,8 @@ export default class MainApiService {
       .then(r => r.json())
       .then(({ results }) => {
         this.incrementPage();
-          results.length = this.resultsPerPage;
-          console.log(results);
+        results.length = this.resultsPerPage;
+        console.log(results);
 
         return results;
       });
