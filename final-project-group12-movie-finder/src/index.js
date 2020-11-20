@@ -98,7 +98,12 @@ const refsHeader
 
 
 
-refsHeader.pageMyLibraryRef.addEventListener("click", (event) => {
+refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick)
+  
+  
+
+  function onLibraryClick(event) {
+  // refsHeader.pageHomeRef.classList.remove("is-active");
   refsHeader.pageMyLibraryRef.classList.add("is-active");
   refsHeader.pageHomeRef.classList.remove("is-active");
 
@@ -108,9 +113,11 @@ refsHeader.pageMyLibraryRef.addEventListener("click", (event) => {
   refsHeader.header.className = "header-lib";
   refsHeader.inputSearchRef.classList.add("not-visible");
   refsHeader.searchIconRef.classList.add("not-visible");
-});
+};
 
-refsHeader.pageHomeRef.addEventListener("click", (event) => {
+
+refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
+function onHomeClick(event) {
   refsHeader.pageHomeRef.classList.add("is-active");
   refsHeader.pageMyLibraryRef.classList.remove("is-active");
 
@@ -119,4 +126,4 @@ refsHeader.pageHomeRef.addEventListener("click", (event) => {
 
   refsHeader.inputSearchRef.classList.remove("not-visible");
   refsHeader.searchIconRef.classList.remove("not-visible");
-});
+};
