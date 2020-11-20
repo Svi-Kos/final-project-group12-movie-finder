@@ -56,6 +56,8 @@ trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
 
 
 function onSearch(event) {
+  refs.dataContainer.innerHTML = '';
+  
   const form = event.target;
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
