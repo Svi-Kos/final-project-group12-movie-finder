@@ -18,6 +18,9 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 // import '@pnotify/core/dist/PNotify.css';
 // import '@pnotify/core/dist/BrightTheme.css';
 
+import teamTpl from './templates/team-markup.hbs';
+import teamList from './js/team';
+
 const headerEl = document.querySelector('.header');
 const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
@@ -37,6 +40,11 @@ const refs = {
   searchForm: document.querySelector('.js-search-form'),
   dataContainer: document.querySelector('.js-data-container'),
   loadMoreBtn: document.querySelector('[data-action="load-more"]'),
+
+  modalFooterEl: document.querySelector('.js-team'),
+  teamBtn: document.querySelector('.button-team'),
+  closeTeamBtn: document.querySelector('[data-action="close-btn-team"]'),
+  modalTeamOverlay: document.querySelector('.team__overlay'),
 };
 
 const moviesApiService = new ApiService();
