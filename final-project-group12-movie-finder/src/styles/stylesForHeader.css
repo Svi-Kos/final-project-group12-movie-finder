@@ -167,6 +167,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 14.06px;
+  background-color: transparent;
+  outline: none;
+  border: none;
 }
 
 .is-active::after {
@@ -214,7 +217,7 @@
   caret-color: white;
 }
 
-.search-field.is-not-visible {
+.search-field.not-visible {
   display: none;
 }
 
@@ -231,6 +234,10 @@
   width: 12px;
   height: 12px;
   background-image: url(../images/search-icon.svg);
+}
+
+.search-icon.not-visible {
+  display: none;
 }
 
 #notify-text {
