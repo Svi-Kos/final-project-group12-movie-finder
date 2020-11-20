@@ -5,6 +5,7 @@ import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
 import ApiService from './js/apiService';
+import MainApiService from './js/mainApiServise'
 import './js/modal'
 import cardFilmTpl from './templates/card-film.hbs'
 // import getRefs from './js/refs';
@@ -22,17 +23,17 @@ import teamTpl from './templates/team-markup.hbs';
 import teamList from './js/team';
 
 const headerEl = document.querySelector('.header');
-const mainEl = document.querySelector('.main');
+// const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
 const modalEl = document.querySelector('.modal');
 
 const headerMarkup = header();
-const mainMarkup = main();
+// const mainMarkup = main();
 const footerMarkup = footer();
 const modalMarkup = modal();
 
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
-mainEl.insertAdjacentHTML('beforeend', mainMarkup);
+// mainEl.insertAdjacentHTML('beforeend', mainMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
 modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
@@ -48,21 +49,29 @@ const refs = {
 };
 
 const moviesApiService = new ApiService();
+const trendMoviesApiServise = new MainApiService();
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+
+trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+
 
 function onSearch(event) {
   const form = event.target;
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
-  moviesApiService.fetchMovies().then(appendFilms);
+  moviesApiService.fetchMovies().then(appendMovies);
 }
 
 function onLoadMore() {
-  moviesApiService.fetchMovies().then(appendFilms);
+  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+
+  moviesApiService.fetchMovies().then(appendMovies);
+
 }
-function appendFilms(results) {
+
+function appendMovies(results) {
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
 }
