@@ -260,7 +260,7 @@
   margin-right: 15px;
 }
 
-.button-list.is-not-visible {
+.button-list.not-visible {
   display: none;
 }
 
