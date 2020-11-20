@@ -214,6 +214,15 @@
   caret-color: white;
 }
 
+.search-field.is-not-visible {
+  display: none;
+}
+
+.search-field:focus::-webkit-input-placeholder {
+  text-indent: 500px;
+  transition: text-indent 0.3s ease;
+}
+
 .search-icon {
   position: absolute;
   top: 10px;
@@ -222,6 +231,16 @@
   width: 12px;
   height: 12px;
   background-image: url(../images/search-icon.svg);
+}
+
+#notify-text {
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+#notify-text.no-success {
+  color: #ff001b;
 }
 
 @media screen and (min-width: 768px) {
