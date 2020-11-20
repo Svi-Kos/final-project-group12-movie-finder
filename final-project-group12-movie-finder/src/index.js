@@ -5,9 +5,9 @@ import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
 import ApiService from './js/apiService';
+import './js/modal';
+import cardFilmTpl from './templates/card-film.hbs';
 import MainApiService from './js/mainApiServise'
-import './js/modal'
-import cardFilmTpl from './templates/card-film.hbs'
 // import getRefs from './js/refs';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
@@ -44,8 +44,6 @@ const refs = {
 
   modalFooterEl: document.querySelector('.js-team'),
   teamBtn: document.querySelector('.button-team'),
-  closeTeamBtn: document.querySelector('[data-action="close-btn-team"]'),
-  modalTeamOverlay: document.querySelector('.team__overlay'),
 };
 
 const moviesApiService = new ApiService();
@@ -74,6 +72,44 @@ function onLoadMore() {
 function appendMovies(results) {
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
+}
+
+
+// Модалка для футера________________________________________________
+
+function renderModalTeam() {
+  const markup = teamTpl(teamList);
+  refs.modalFooterEl.insertAdjacentHTML('beforeend', markup);
+}
+
+refs.teamBtn.addEventListener('click', onOpenModal);
+renderModalTeam();
+
+const closeTeamBtn = document.querySelector('[data-action="close-btn-team"]');
+const modalTeamOverlay = document.querySelector('.team__overlay');
+closeTeamBtn.addEventListener('click', onCloseModal);
+modalTeamOverlay.addEventListener('click', onOverlayClick);
+
+function onOpenModal() {
+  refs.modalFooterEl.classList.add('is-open');
+  window.addEventListener('keydown', onKeyPress);
+}
+
+function onKeyPress(event) {
+  if (event.code === 'Escape') {
+    onCloseModal();
+  }
+}
+
+function onCloseModal() {
+  refs.modalFooterEl.classList.remove('is-open');
+  window.removeEventListener('keydown', onKeyPress);
+}
+
+function onOverlayClick(event) {
+  if (event.currentTarget === event.target) {
+    onCloseModal();
+  }
 }
 
 
@@ -127,3 +163,4 @@ function onHomeClick(event) {
   refsHeader.inputSearchRef.classList.remove("not-visible");
   refsHeader.searchIconRef.classList.remove("not-visible");
 };
+

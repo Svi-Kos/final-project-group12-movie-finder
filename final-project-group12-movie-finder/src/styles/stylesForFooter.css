@@ -1,7 +1,6 @@
 .footer {
   margin: 0;
   padding: 0;
-
 }
 
 p {
@@ -56,6 +55,10 @@ p {
 
 .button-team {
   text-decoration: underline;
+  cursor: pointer;
+  background-color: inherit;
+  border: transparent;
+  outline: none;
 }
 
 .team {
@@ -69,7 +72,6 @@ p {
   height: 100vh;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--animation-duration) var(--timing-function);
   overflow: auto;
   z-index: 999;
 }
@@ -94,9 +96,14 @@ p {
   padding: 30px;
   border-radius: 10px;
   background-color: #fff;
-  transition: transform var(--animation-duration) var(--timing-function);
   max-width: 768px;
   top: 3%;
+}
+
+.team-title {
+  margin: 0 auto;
+  font-size: 34px;
+  text-align: center;
 }
 
 .team-list {
@@ -125,29 +132,5 @@ p {
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
-}
-
-/* .close-btn-team {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  border-radius: 50%;
-  background-color: transparent;
-  color: #fff;
   cursor: pointer;
-  transition: background-color var(--animation-duration) var(--timing-function);
-  outline: none;
-  background-image: url('..images/team/close_icon.png');
-  background-position: center;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  transition: transform 0.3s linear;
-} */
+}
