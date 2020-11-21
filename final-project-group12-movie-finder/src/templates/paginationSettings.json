@@ -1,0 +1,9 @@
+{
+    "currentPage": 1,
+    "totalPages": 20,
+    "boundaryPagesRange": 1,
+    "siblingPagesRange": 2,
+    "hideEllipsis": false,
+    "hidePreviousAndNextPageLinks": false,
+    "hideFirstAndLastPageLinks": true
+}

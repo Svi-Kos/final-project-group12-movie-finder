@@ -30,6 +30,11 @@ import Natalie from './images/team/Natalie.jpg';
 import Dmytro from './images/team/Dmytro.jpg';
 import Yulia from './images/team/Yuliia.jpg';
 
+import paginationTpl from './js/pagination';
+import paginationSettings from './templates/paginationSettings.json';
+
+console.log(paginationTpl(paginationSettings));
+
 const headerEl = document.querySelector('.header');
 // const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
