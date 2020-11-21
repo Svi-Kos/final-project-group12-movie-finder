@@ -124,7 +124,7 @@ const refsHeader
   header: document.querySelector(".header"),
   searchInfo: document.querySelector("#notify-text"),
   searchIconRef: document.querySelector(".search-icon"),
-  pageHomeRef: document.querySelector(`[data-nav-choice="home"]`),
+  pageHomeRef: document.querySelector(`[data-nav-choice="home"]`), 
   pageMyLibraryRef: document.querySelector(`[data-nav-choice="my-library"]`),
   buttonListRef: document.querySelector(
     `[data-button-list-header="watched-and-queue"]`
@@ -132,18 +132,15 @@ const refsHeader
   inputSearchRef: document.querySelector(".search-field"),
 };
 
-
-
-
-
-refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick)
+refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick);
+refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
   
   
 
   function onLibraryClick(event) {
-  // refsHeader.pageHomeRef.classList.remove("is-active");
+   
   refsHeader.pageMyLibraryRef.classList.add("is-active");
-  refsHeader.pageHomeRef.classList.remove("is-active");
+  refsHeader.pageHomeRef.classList.remove('is-active');
 
   refsHeader.searchInfo.textContent = "";
 
@@ -154,7 +151,7 @@ refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick)
 };
 
 
-refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
+
 function onHomeClick(event) {
   refsHeader.pageHomeRef.classList.add("is-active");
   refsHeader.pageMyLibraryRef.classList.remove("is-active");
