@@ -1,35 +1,35 @@
 import ApiModal from './apiServiceModal.js';
 import ModalTpl from '../templates/modal.hbs';
-import Card from '../templates/card-film.hbs';
 
-const card = document.querySelector('.list__element');
-console.log(card);
-const openedModal = document.querySelector('.main');
-const modal = document.querySelector('.modal');
-const body = document.querySelector('body');
+const refs = {
+openedModal: document.querySelector('.main'),
+modal: document.querySelector('.modal'),
+  body: document.querySelector('body'),
+overlayClick: document.querySelector('.backdrop')
+}
 
-openedModal.addEventListener('click', openModal);
+refs.openedModal.addEventListener('click', openModal);
+
 
 export function openModal(event) {
-  const movieId = event.target.dataset.src;
+   const movieId = event.target.dataset.src;
 
   if (event.target.nodeName !== 'IMG') {
     return;
   } else {
-    modal.classList.remove('is-hidden');
-    body.classList.add('body');
+    refs.modal.classList.remove('is-hidden');
+    refs.body.classList.add('body');
     ApiModal.fetchMovie(movieId)
       .then(renderModalCard)
       .catch(err => console.log(err));
   }
 }
 
-const overlayClick = document.querySelector('.backdrop');
+refs.overlayClick.addEventListener('click', onOverlayClick);
 
-overlayClick.addEventListener('click', onOverlayClick);
-
-function onOverlayClick() {
+function onOverlayClick(e) {
   closeModal();
+  console.log(e)
 }
 window.addEventListener('keydown', onOverlaykey);
 
@@ -43,11 +43,13 @@ function onOverlaykey(evt) {
 }
 
 function closeModal() {
-  modal.classList.add('is-hidden');
-  body.classList.remove('body');
+  refs.modal.classList.add('is-hidden');
+  refs.body.classList.remove('body');
+  const markup = ModalTpl();
+  refs.modal.insertAdjacentHTML('beforeend', markup)
 }
 
 function renderModalCard(data) {
   const markup = ModalTpl(data);
-  modal.insertAdjacentHTML('beforeend', markup);
+  refs.modal.insertAdjacentHTML('beforeend', markup);
 }

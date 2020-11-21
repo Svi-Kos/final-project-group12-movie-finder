@@ -63,6 +63,8 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
 
 function onSearch(event) {
+  refs.dataContainer.innerHTML = '';
+  
   const form = event.target;
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
@@ -119,6 +121,7 @@ function onOverlayClick(event) {
 
 // header buttons switches by Dasha
 
+
 const refsHeader = {
   header: document.querySelector('.header'),
   searchInfo: document.querySelector('#notify-text'),
@@ -131,11 +134,16 @@ const refsHeader = {
   inputSearchRef: document.querySelector('.search-field'),
 };
 
-refsHeader.pageMyLibraryRef.addEventListener('click', onLibraryClick);
 
-function onLibraryClick(event) {
-  // refsHeader.pageHomeRef.classList.remove("is-active");
-  refsHeader.pageMyLibraryRef.classList.add('is-active');
+refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick);
+refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
+  
+  
+
+  function onLibraryClick(event) {
+   
+  refsHeader.pageMyLibraryRef.classList.add("is-active");
+
   refsHeader.pageHomeRef.classList.remove('is-active');
 
   refsHeader.searchInfo.textContent = '';
@@ -146,7 +154,11 @@ function onLibraryClick(event) {
   refsHeader.searchIconRef.classList.add('not-visible');
 }
 
+
 refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
+
+
+
 function onHomeClick(event) {
   refsHeader.pageHomeRef.classList.add('is-active');
   refsHeader.pageMyLibraryRef.classList.remove('is-active');
@@ -154,6 +166,11 @@ function onHomeClick(event) {
   refsHeader.buttonListRef.classList.add('not-visible');
   refsHeader.header.className = 'header';
 
+
   refsHeader.inputSearchRef.classList.remove('not-visible');
   refsHeader.searchIconRef.classList.remove('not-visible');
 }
+
+import './js/local-storage.js'
+
+
