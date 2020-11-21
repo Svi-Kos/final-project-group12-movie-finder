@@ -33,10 +33,8 @@ import Yulia from './images/team/Yuliia.jpg';
 import paginationTpl from './js/pagination';
 import paginationSettings from './templates/paginationSettings.json';
 
-console.log(paginationTpl(paginationSettings));
-
 const headerEl = document.querySelector('.header');
-// const mainEl = document.querySelector('.main');
+const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
 const modalEl = document.querySelector('.modal');
 
@@ -44,9 +42,9 @@ const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
 const modalMarkup = modal();
-
+const paginationContainerString = '<div id="pagination" class="pagination-container">'+paginationTpl(paginationSettings)+'</div>';
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
-// mainEl.insertAdjacentHTML('beforeend', mainMarkup);
+mainEl.insertAdjacentHTML('beforeend', paginationContainerString);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
 modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
@@ -57,6 +55,8 @@ const refs = {
 
   modalFooterEl: document.querySelector('.js-team'),
   teamBtn: document.querySelector('.button-team'),
+
+  paginationContainer: document.querySelector('#pagination'),
 };
 
 const moviesApiService = new ApiService();
@@ -65,7 +65,23 @@ const trendMoviesApiServise = new MainApiService();
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
-trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+refs.paginationContainer.addEventListener('click', onPaginate);
+
+function onPaginate(event) {
+  event.preventDefault();
+  // if (!event.target.classList.contains('.pagination-link')) {
+  //   return;
+  // }
+  paginationSettings.currentPage = Number(event.target.dataset.value);
+  refs.paginationContainer = paginationTpl(paginationSettings);
+  refs.dataContainer.innerHTML = '';
+  moviesApiService.page = Number(event.target.dataset.value);
+  console.log(moviesApiService.page);
+  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+  moviesApiService.fetchMovies().then(appendMovies);
+}
+
+// trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
 
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';

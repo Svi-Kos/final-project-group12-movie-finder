@@ -9,7 +9,7 @@ export default class MainApiService {
     return fetch(url)
       .then(r => r.json())
       .then(({ results }) => {
-        this.incrementPage();
+        // this.incrementPage();
         results.length = this.resultsPerPage;
         console.log(results);
 
