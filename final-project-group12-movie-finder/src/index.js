@@ -166,3 +166,5 @@ function onHomeClick(event) {
   refsHeader.searchIconRef.classList.remove("not-visible");
 };
 
+import './js/local-storage.js'
+
