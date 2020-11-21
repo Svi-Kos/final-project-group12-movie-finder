@@ -1,16 +1,17 @@
 export default [
   {
-    name: 'Tetiana',
-    surname: 'Korobko',
-    photo: './images/team/Tetiana.jpg',
-    github: 'https://github.com/Tetiana-Kor',
-  },
-  {
     name: 'Svitlana',
     surname: 'Kostenko',
     photo: './images/team/Svitlana.jpg',
     github: 'https://github.com/Svi-Kos',
   },
+  {
+    name: 'Tetiana',
+    surname: 'Korobko',
+    photo: './images/team/Tetiana.jpg',
+    github: 'https://github.com/Tetiana-Kor',
+  },
+
   {
     name: 'Ivan',
     surname: 'Makovetski',
@@ -30,15 +31,15 @@ export default [
     github: 'https://github.com/NatalieRich',
   },
   {
-    name: 'Dmytro',
-    surname: 'Melnychenko',
-    photo: './images/team/Dmytro.jpg',
-    github: 'https://github.com/DimaMelia',
-  },
-  {
     name: 'Yulia',
     surname: 'Filonenko',
     photo: './images/team/Yuliia.jpg',
     github: 'https://github.com/yulyafil',
+  },
+  {
+    name: 'Dmytro',
+    surname: 'Melnychenko',
+    photo: './images/team/Dmytro.jpg',
+    github: 'https://github.com/DimaMelia',
   },
 ];

@@ -7,7 +7,7 @@ import './styles/stylesForModal.css';
 import ApiService from './js/apiService';
 import './js/modal';
 import cardFilmTpl from './templates/card-film.hbs';
-import MainApiService from './js/mainApiServise'
+import MainApiService from './js/mainApiServise';
 // import getRefs from './js/refs';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
@@ -21,6 +21,14 @@ import '@pnotify/core/dist/BrightTheme.css';
 
 import teamTpl from './templates/team-markup.hbs';
 import teamList from './js/team';
+
+import Tetiana from './images/team/Tetiana.jpg';
+import Svitlana from './images/team/Svitlana.jpg';
+import Ivan from './images/team/Ivan.jpg';
+import Dasha from './images/team/Dasha.jpg';
+import Natalie from './images/team/Natalie.jpg';
+import Dmytro from './images/team/Dmytro.jpg';
+import Yulia from './images/team/Yuliia.jpg';
 
 const headerEl = document.querySelector('.header');
 // const mainEl = document.querySelector('.main');
@@ -54,7 +62,6 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
 
-
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';
   
@@ -68,14 +75,12 @@ function onLoadMore() {
   trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
 
   moviesApiService.fetchMovies().then(appendMovies);
-
 }
 
 function appendMovies(results) {
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
 }
-
 
 // Модалка для футера________________________________________________
 
@@ -114,23 +119,21 @@ function onOverlayClick(event) {
   }
 }
 
-
-
 // header buttons switches by Dasha
 
-const refsHeader
-  = {
-  
-  header: document.querySelector(".header"),
-  searchInfo: document.querySelector("#notify-text"),
-  searchIconRef: document.querySelector(".search-icon"),
-  pageHomeRef: document.querySelector(`[data-nav-choice="home"]`), 
+
+const refsHeader = {
+  header: document.querySelector('.header'),
+  searchInfo: document.querySelector('#notify-text'),
+  searchIconRef: document.querySelector('.search-icon'),
+  pageHomeRef: document.querySelector(`[data-nav-choice="home"]`),
   pageMyLibraryRef: document.querySelector(`[data-nav-choice="my-library"]`),
   buttonListRef: document.querySelector(
-    `[data-button-list-header="watched-and-queue"]`
+    `[data-button-list-header="watched-and-queue"]`,
   ),
-  inputSearchRef: document.querySelector(".search-field"),
+  inputSearchRef: document.querySelector('.search-field'),
 };
+
 
 refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick);
 refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
@@ -140,28 +143,34 @@ refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
   function onLibraryClick(event) {
    
   refsHeader.pageMyLibraryRef.classList.add("is-active");
+
   refsHeader.pageHomeRef.classList.remove('is-active');
 
-  refsHeader.searchInfo.textContent = "";
+  refsHeader.searchInfo.textContent = '';
 
-  refsHeader.buttonListRef.classList.remove("not-visible");
-  refsHeader.header.className = "header-lib";
-  refsHeader.inputSearchRef.classList.add("not-visible");
-  refsHeader.searchIconRef.classList.add("not-visible");
-};
+  refsHeader.buttonListRef.classList.remove('not-visible');
+  refsHeader.header.className = 'header-lib';
+  refsHeader.inputSearchRef.classList.add('not-visible');
+  refsHeader.searchIconRef.classList.add('not-visible');
+}
+
+
+refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
 
 
 function onHomeClick(event) {
-  refsHeader.pageHomeRef.classList.add("is-active");
-  refsHeader.pageMyLibraryRef.classList.remove("is-active");
+  refsHeader.pageHomeRef.classList.add('is-active');
+  refsHeader.pageMyLibraryRef.classList.remove('is-active');
 
-  refsHeader.buttonListRef.classList.add("not-visible");
-  refsHeader.header.className = "header";
+  refsHeader.buttonListRef.classList.add('not-visible');
+  refsHeader.header.className = 'header';
 
-  refsHeader.inputSearchRef.classList.remove("not-visible");
-  refsHeader.searchIconRef.classList.remove("not-visible");
-};
+
+  refsHeader.inputSearchRef.classList.remove('not-visible');
+  refsHeader.searchIconRef.classList.remove('not-visible');
+}
 
 import './js/local-storage.js'
+
 
