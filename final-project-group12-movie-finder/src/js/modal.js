@@ -1,35 +1,31 @@
 import ApiModal from './apiServiceModal.js';
 import ModalTpl from '../templates/modal.hbs';
-import Card from '../templates/card-film.hbs';
 
+const refs = {
+openedModal: document.querySelector('.main'),
+modal: document.querySelector('.modal'),
+  body: document.querySelector('body'),
+overlayClick: document.querySelector('.backdrop')
+}
 
-const openedModal = document.querySelector('.main');
-const modal = document.querySelector('.modal');
-const body = document.querySelector('body');
+refs.openedModal.addEventListener('click', openModal);
 
-openedModal.addEventListener('click', openModal);
-let movieId =''
 
 export function openModal(event) {
-   movieId = event.target.dataset.src;
+   const movieId = event.target.dataset.src;
 
   if (event.target.nodeName !== 'IMG') {
     return;
   } else {
-    const targetModal = event.target.parentNode.innerHTML
-    localStorage.setItem('targetModal', JSON.stringify(targetModal))
-    console.log(targetModal)
-    modal.classList.remove('is-hidden');
-    body.classList.add('body');
+    refs.modal.classList.remove('is-hidden');
+    refs.body.classList.add('body');
     ApiModal.fetchMovie(movieId)
       .then(renderModalCard)
       .catch(err => console.log(err));
   }
 }
 
-const overlayClick = document.querySelector('.backdrop');
-
-overlayClick.addEventListener('click', onOverlayClick);
+refs.overlayClick.addEventListener('click', onOverlayClick);
 
 function onOverlayClick(e) {
   closeModal();
@@ -47,12 +43,13 @@ function onOverlaykey(evt) {
 }
 
 function closeModal() {
-  modal.classList.add('is-hidden');
-  body.classList.remove('body');
- modal.insertAdjacentHTML('beforeend', "");
+  refs.modal.classList.add('is-hidden');
+  refs.body.classList.remove('body');
+  const markup = ModalTpl();
+  refs.modal.insertAdjacentHTML('beforeend', markup)
 }
 
 function renderModalCard(data) {
   const markup = ModalTpl(data);
-  modal.insertAdjacentHTML('beforeend', markup);
+  refs.modal.insertAdjacentHTML('beforeend', markup);
 }
