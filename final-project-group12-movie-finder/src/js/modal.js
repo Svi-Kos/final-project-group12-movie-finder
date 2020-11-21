@@ -17,6 +17,9 @@ export function openModal(event) {
   if (event.target.nodeName !== 'IMG') {
     return;
   } else {
+    const targetModal = event.target.parentNode.innerHTML
+    localStorage.setItem('targetModal', JSON.stringify(targetModal))
+    console.log(targetModal)
     refs.modal.classList.remove('is-hidden');
     refs.body.classList.add('body');
     ApiModal.fetchMovie(movieId)
