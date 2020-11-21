@@ -1,6 +1,6 @@
 import ultimatePagination from 'ultimate-pagination';
 
-const paginationOptions = {
+const paginationSettings = {
     // Required
     currentPage: 1,
     totalPages: 20,
@@ -14,7 +14,7 @@ const paginationOptions = {
   }
 
   
-  function paginationTpl(options) {
+  export default function paginationTpl(options) {
     return ultimatePagination.getPaginationModel(options).map(pagination => {
     let tpl;
     let disable = '';
@@ -42,10 +42,3 @@ ${pagination.value}
 }
 }).join('');
   }
-
-// function onPageSwitch (evt) {
-//     evt.preventDefault();
-//     paginationOptions.currentPage = evt.target.dataset.value;
-// }
-
-console.log(paginationTpl(paginationOptions));
