@@ -2,16 +2,16 @@ import ApiModal from './apiServiceModal.js';
 import ModalTpl from '../templates/modal.hbs';
 import Card from '../templates/card-film.hbs';
 
-const card = document.querySelector('.list__element');
-console.log(card);
+
 const openedModal = document.querySelector('.main');
 const modal = document.querySelector('.modal');
 const body = document.querySelector('body');
 
 openedModal.addEventListener('click', openModal);
+let movieId =''
 
 export function openModal(event) {
-  const movieId = event.target.dataset.src;
+   movieId = event.target.dataset.src;
 
   if (event.target.nodeName !== 'IMG') {
     return;
@@ -28,8 +28,9 @@ const overlayClick = document.querySelector('.backdrop');
 
 overlayClick.addEventListener('click', onOverlayClick);
 
-function onOverlayClick() {
+function onOverlayClick(e) {
   closeModal();
+  console.log(e)
 }
 window.addEventListener('keydown', onOverlaykey);
 
@@ -45,6 +46,7 @@ function onOverlaykey(evt) {
 function closeModal() {
   modal.classList.add('is-hidden');
   body.classList.remove('body');
+ modal.insertAdjacentHTML('beforeend', "");
 }
 
 function renderModalCard(data) {
