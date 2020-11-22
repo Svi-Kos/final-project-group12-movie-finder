@@ -1,3 +1,7 @@
+import GenresApiService from './apiGenresName';
+
+const genresNameApi = new GenresApiService();
+
 export default class MainApiService {
   constructor() {
     this.searchQuery = '';
@@ -13,6 +17,13 @@ export default class MainApiService {
         results.length = this.resultsPerPage;
 
         return results;
+      })
+      .then((results) => {
+       const replacedData = genresNameApi.fetchGenresName()
+         .then((genres) => {
+            return replaceGenresIdsToNames(genres, results);
+         });
+       return replacedData
       });
   }
 
@@ -28,4 +39,14 @@ export default class MainApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+}
+
+function replaceGenresIdsToNames(genres, results) {
+  return results.map(({ genre_ids, ...otherProps }) => {
+    const genre_names = genre_ids.map((genreId) => {
+      const { name } = genres.find(({ id }) => id === genreId);
+      return name;
+    });
+    return { ...otherProps, genre_names };
+  });
 }
