@@ -48,8 +48,6 @@ function onOverlaykey(evt) {
 function closeModal() {
   refs.modal.classList.add('is-hidden');
   refs.body.classList.remove('body');
-  const markup = ModalTpl();
-  refs.modal.insertAdjacentHTML('beforeend', markup)
 }
 
 function renderModalCard(data) {

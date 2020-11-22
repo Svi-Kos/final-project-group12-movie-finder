@@ -12,7 +12,7 @@ import MainApiService from './js/mainApiServise';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
 import footer from './partials/footer.hbs';
-import modal from './templates/modal.hbs';
+// import modal from './templates/modal.hbs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { alert, defaultModules } from '@pnotify/core';
@@ -43,12 +43,12 @@ const modalEl = document.querySelector('.modal');
 const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
-const modalMarkup = modal();
+// const modalMarkup = modal();
 
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
 // mainEl.insertAdjacentHTML('beforeend', mainMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
-modalEl.insertAdjacentHTML('beforeend', modalMarkup);
+// modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
