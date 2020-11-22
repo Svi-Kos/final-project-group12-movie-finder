@@ -1,5 +1,5 @@
-localStorage.clear()
 const main = document.querySelector('.main')
+const myLibraryBtn = document.querySelector('.my-library')
 const list = document.querySelector('.js-data-container')
 const watchedBtn = document.querySelector('.libr-watched')
 const queueBtn = document.querySelector('.libr-queue')
@@ -38,7 +38,14 @@ modal.addEventListener('click', function() {
   })
 
 watchedBtn.addEventListener('click', function() {
-    list.remove()
+    const allList = document.querySelectorAll('.js-data-container')
+    for (const list of allList) {
+        list.remove()
+    }
+    const allTitle = document.querySelectorAll('.title-view-type')
+    for (const title of allTitle) {
+        title.remove()
+    }
     const watchedList = document.createElement('ul')
     watchedList.setAttribute('class', 'js-data-container')
     main.appendChild(watchedList)
@@ -55,7 +62,14 @@ watchedBtn.addEventListener('click', function() {
   })
 
 queueBtn.addEventListener('click', function() {
-    list.remove()
+    const allList = document.querySelectorAll('.js-data-container')
+    for (const list of allList) {
+        list.remove()
+    }
+    const allTitle = document.querySelectorAll('.title-view-type')
+    for (const title of allTitle) {
+        title.remove()
+    }
     const queueList = document.createElement('ul')
     queueList.setAttribute('class', 'js-data-container')
     main.appendChild(queueList)
@@ -70,3 +84,48 @@ queueBtn.addEventListener('click', function() {
         queueList.appendChild(li)
     }
   })
+
+myLibraryBtn.addEventListener('click', function(){
+    const allList = document.querySelectorAll('.js-data-container')
+    for (const list of allList) {
+        list.remove()
+    }
+    const allTitle = document.querySelectorAll('.title-view-type')
+    for (const title of allTitle) {
+        title.remove()
+    }
+    const queueTitle = document.createElement('h3')
+    queueTitle.classList.add('title-view-type')
+    queueTitle.textContent = 'Queue'
+    main.appendChild(queueTitle)
+    const queueList = document.createElement('ul')
+    queueList.setAttribute('class', 'js-data-container')
+    main.appendChild(queueList)
+    let queueArray = localStorage.getItem('arrayQueue')
+    queueArray = JSON.parse(queueArray)
+    for (const object of queueArray) {
+        const innerHTML = JSON.parse(object)
+
+        const li = document.createElement('li')
+        li.setAttribute('class', 'list__element')
+        li.insertAdjacentHTML('beforeend', innerHTML)
+        queueList.appendChild(li)
+    }
+    const watchedTitle = document.createElement('h3')
+    watchedTitle.classList.add('title-view-type')
+    watchedTitle.textContent = 'Watched'
+    main.appendChild(watchedTitle)
+    const watchedList = document.createElement('ul')
+    watchedList.setAttribute('class', 'js-data-container')
+    main.appendChild(watchedList)
+    let watchedArray = localStorage.getItem('arrayWatched')
+    watchedArray = JSON.parse(watchedArray)
+    for (const object of watchedArray) {
+        const innerHTML = JSON.parse(object)
+
+        const li = document.createElement('li')
+        li.setAttribute('class', 'list__element')
+        li.insertAdjacentHTML('beforeend', innerHTML)
+        watchedList.appendChild(li)
+    }
+})
