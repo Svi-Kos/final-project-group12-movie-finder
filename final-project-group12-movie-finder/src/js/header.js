@@ -12,12 +12,10 @@
 // };
 
 
-
-
-
 // refs.pageMyLibraryRef.addEventListener("click", (event) => {
 //   refs.pageMyLibraryRef.classList.add("is-active");
 //   refs.pageHomeRef.classList.remove("is-active");
+//   refs.loadMore.classList.add("is-hidden");
 
 //   refs.searchInfo.textContent = "";
 
@@ -30,6 +28,7 @@
 // refs.pageHomeRef.addEventListener("click", (event) => {
 //   refs.pageHomeRef.classList.add("is-active");
 //   refs.pageMyLibraryRef.classList.remove("is-active");
+//   refs.loadMore.classList.remove("is-hidden");
 
 //   refs.buttonListRef.classList.add("not-visible");
 //   refs.header.className = "header";

@@ -155,6 +155,7 @@ function onOverlayClick(event) {
 
 const refsHeader = {
   header: document.querySelector('.header'),
+  loadMore: document.querySelector(".btn-load-more"),
   searchInfo: document.querySelector('#notify-text'),
   searchIconRef: document.querySelector('.search-icon'),
   pageHomeRef: document.querySelector(`[data-nav-choice="home"]`),
@@ -169,6 +170,7 @@ refsHeader.pageMyLibraryRef.addEventListener('click', onLibraryClick);
 refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
 function onLibraryClick(event) {
+  refsHeader.loadMore.classList.add('is-hidden')
   refsHeader.pageMyLibraryRef.classList.add('is-active');
 
   refsHeader.pageHomeRef.classList.remove('is-active');
@@ -184,6 +186,7 @@ function onLibraryClick(event) {
 refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
 function onHomeClick(event) {
+  refsHeader.loadMore.classList.remove('is-hidden')
   refsHeader.pageHomeRef.classList.add('is-active');
   refsHeader.pageMyLibraryRef.classList.remove('is-active');
 
