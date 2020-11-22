@@ -1,10 +1,8 @@
 import ultimatePagination from 'ultimate-pagination';
-
 const paginationSettings = {
     // Required
     currentPage: 6,
     totalPages: 20,
-  
     // Optional
     boundaryPagesRange: 1,
     siblingPagesRange: 2,
@@ -12,7 +10,6 @@ const paginationSettings = {
     hidePreviousAndNextPageLinks: false,
     hideFirstAndLastPageLinks: true,
   }
-
   export default function paginationTpl(options) {
     const pagination = ultimatePagination.getPaginationModel(options).map(pagination => {
     let tpl;
@@ -38,5 +35,4 @@ const paginationSettings = {
 }).join('');
 return `<div id="pagination" class="pagination-container">${pagination}</div>`;
   }
-
 //   console.log(ultimatePagination.getPaginationModel(paginationSettings));

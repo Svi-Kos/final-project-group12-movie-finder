@@ -13,7 +13,7 @@ import MainApiService from './js/mainApiServise';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
 import footer from './partials/footer.hbs';
-import modal from './templates/modal.hbs';
+// import modal from './templates/modal.hbs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { alert, defaultModules } from '@pnotify/core';
@@ -31,8 +31,9 @@ import Natalie from './images/team/Natalie.jpg';
 import Dmytro from './images/team/Dmytro.jpg';
 import Yulia from './images/team/Yuliia.jpg';
 
-import paginationTpl from './js/pagination';
-import paginationSettings from './templates/paginationSettings.json';
+// import paginationTpl from './js/pagination';
+// import paginationSettings from './templates/paginationSettings.json';
+
 
 const headerEl = document.querySelector('.header');
 const mainEl = document.querySelector('.main');
@@ -42,10 +43,12 @@ const modalEl = document.querySelector('.modal');
 const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
+
 const modalMarkup = modal();
+
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
-modalEl.insertAdjacentHTML('beforeend', modalMarkup);
+// modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
@@ -74,7 +77,7 @@ trendMoviesApiServise.fetchMoviesTrend().then(appendMovies).then(renderPaginatio
 
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';
-  
+
   const form = event.target;
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
@@ -92,9 +95,8 @@ function onLoadPage(event) {
 }
 
 function onLoadMore() {
-  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
-
-  moviesApiService.fetchMovies().then(appendMovies);
+  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies) ||
+    moviesApiService.fetchMovies().then(appendMovies);
 }
 
 function appendMovies(results) {
@@ -143,7 +145,6 @@ function onOverlayClick(event) {
 
 // header buttons switches by Dasha
 
-
 const refsHeader = {
   header: document.querySelector('.header'),
   searchInfo: document.querySelector('#notify-text'),
@@ -156,15 +157,11 @@ const refsHeader = {
   inputSearchRef: document.querySelector('.search-field'),
 };
 
+refsHeader.pageMyLibraryRef.addEventListener('click', onLibraryClick);
+refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
-refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick);
-refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
-  
-  
-
-  function onLibraryClick(event) {
-   
-  refsHeader.pageMyLibraryRef.classList.add("is-active");
+function onLibraryClick(event) {
+  refsHeader.pageMyLibraryRef.classList.add('is-active');
 
   refsHeader.pageHomeRef.classList.remove('is-active');
 
@@ -176,10 +173,7 @@ refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
   refsHeader.searchIconRef.classList.add('not-visible');
 }
 
-
 refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
-
-
 
 function onHomeClick(event) {
   refsHeader.pageHomeRef.classList.add('is-active');
@@ -188,11 +182,8 @@ function onHomeClick(event) {
   refsHeader.buttonListRef.classList.add('not-visible');
   refsHeader.header.className = 'header';
 
-
   refsHeader.inputSearchRef.classList.remove('not-visible');
   refsHeader.searchIconRef.classList.remove('not-visible');
 }
 
-import './js/local-storage.js'
-
-
+import './js/local-storage.js';
