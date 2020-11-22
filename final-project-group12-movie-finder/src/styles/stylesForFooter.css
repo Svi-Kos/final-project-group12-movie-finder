@@ -97,6 +97,18 @@
   transition: transform var(--animation-duration) var(--timing-function);
 }
 
+@media screen and (max-width: 1023px) {
+  .team__content {
+    max-width: 680px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .team__content {
+    max-width: 320px;
+  }
+}
+
 .team-list {
   display: flex;
   flex-wrap: wrap;
@@ -111,16 +123,28 @@
   margin-bottom: 30px;
 }
 
+@media screen and (max-width: 1023px) {
+  .team-item {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .team-item {
+    width: 130px;
+  }
+}
+
 .team-item__img {
   border-radius: 50%;
   margin-bottom: 20px;
-  transition: transform 0.3s linear;
+  transition: transform var(--animation-duration) var(--timing-function);
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.55);
 }
 
 .team-item__img:hover {
   transform: scale(1.1);
-  transition: transform 0.3s linear;
+  transition: var(--animation-duration) var(--timing-function);
 }
 
 .team-item__about {
@@ -129,6 +153,10 @@
   color: #ff6b01;
   font-weight: bold;
   /* text-shadow: 1px 1px 2px #ff6b01; */
+}
+
+.team-item__name {
+ display: block;
 }
 
 .team__button-close {
@@ -144,7 +172,7 @@
   outline: none;
   border-radius: 50%;
   transition: background-color var(--animation-duration) var(--timing-function),
-    transform 0.5s linear;
+    transform 0.5s var(--timing-function);
 
   background-image: url('../images/team/close_icon.png');
   background-position: center;
