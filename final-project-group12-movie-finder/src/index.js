@@ -8,6 +8,7 @@ import ApiService from './js/apiService';
 import './js/modal';
 import cardFilmTpl from './templates/card-film.hbs';
 import MainApiService from './js/mainApiServise';
+import GenresApiService from './js/apiGenresName';
 // import getRefs from './js/refs';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
@@ -61,6 +62,7 @@ const refs = {
 
 const moviesApiService = new ApiService();
 const trendMoviesApiServise = new MainApiService();
+const genresNameApi = new GenresApiService();
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
@@ -82,9 +84,16 @@ function onLoadMore() {
 }
 
 function appendMovies(results) {
+  
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
 }
+function sliceDate(release_date) {
+  const dateMovies = release_date.slice(0, 4);
+  console.log(dateMovies);
+  return dateMovies;
+}
+
 
 // Модалка для футера________________________________________________
 

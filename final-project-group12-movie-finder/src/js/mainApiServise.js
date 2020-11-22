@@ -1,3 +1,9 @@
+import GenresApiService from './apiGenresName';
+import ApiService from './apiService';
+
+const genresNameApi = new GenresApiService();
+const moviesApiService = new ApiService();
+
 export default class MainApiService {
   constructor() {
     this.searchQuery = '';
@@ -14,7 +20,25 @@ export default class MainApiService {
         console.log(results);
 
         return results;
+      })
+      .then((results) => {
+        const replacedData = genresNameApi.fetchGenresName()
+          .then((genres) => {
+            return replaceGenresIdsToNames(genres, results);
+            
+          });
+       
+        return replacedData;
+
       });
+      // .then((replacedData) => {
+      //   const dataResult = moviesApiService.fetchMovies()
+      //     .then((results) => {
+      //       return sliceDate();
+      //     })
+      //   return dataResult;
+      // });
+   
   }
 
   incrementPage() {
@@ -30,3 +54,21 @@ export default class MainApiService {
     this.searchQuery = newQuery;
   }
 }
+
+
+function replaceGenresIdsToNames(genres, results) {
+  return results.map(({ genre_ids, ...otherProps }) => {
+    const genre_names = genre_ids.map((genreId) => {
+      const { name } = genres.find(({ id }) => id === genreId);
+      return name;
+    });
+    //  console.log(genre_names)
+    return { ...otherProps, genre_names };
+  });
+}
+
+// function sliceDate(release_date) {
+//   const data_years = release_date.slice(0, 4);
+  
+//   return console.log(data_years);
+// }
