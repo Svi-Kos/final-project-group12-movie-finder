@@ -1,0 +1,22 @@
+/* `<a href="#" class="pagination-${pagination.type}-btn ${disable}" data-value = "${pagination.value}"><svg class="pagination-link pagination-${pagination.type}-icon ${disable}" width="16" height="16"><use href="../images/${pagination.type}.svg"></use></svg></a>`; */
+
+.pagination-PREVIOUS_PAGE_LINK-btn {
+    
+}
+.is-disabled {
+    background-color: aqua;
+}
+
+.pagination-link {
+    width: 40px; 
+    height: 40px;
+    border-radius: 5px;
+} 
+
+.pagination-PAGE-btn  {
+
+}
+
+.current-page-btn {
+
+}

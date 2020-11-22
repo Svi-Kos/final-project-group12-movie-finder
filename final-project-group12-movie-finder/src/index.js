@@ -4,6 +4,7 @@ import './styles/stylesForHeader.css';
 import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
+import './styles/stylesForPagination.css'
 import ApiService from './js/apiService';
 import './js/modal';
 import cardFilmTpl from './templates/card-film.hbs';
@@ -33,20 +34,19 @@ import Yulia from './images/team/Yuliia.jpg';
 // import paginationTpl from './js/pagination';
 // import paginationSettings from './templates/paginationSettings.json';
 
-// console.log(paginationTpl(paginationSettings));
 
 const headerEl = document.querySelector('.header');
-// const mainEl = document.querySelector('.main');
+const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
 const modalEl = document.querySelector('.modal');
 
 const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
-// const modalMarkup = modal();
+
+const modalMarkup = modal();
 
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
-// mainEl.insertAdjacentHTML('beforeend', mainMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
 // modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
@@ -65,7 +65,15 @@ const trendMoviesApiServise = new MainApiService();
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
-trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+function renderPagination({ page, totalPages }) {
+  paginationSettings.currentPage = page;
+  paginationSettings.totalPages = totalPages;
+  refs.dataContainer.insertAdjacentHTML('beforeend', paginationTpl(paginationSettings));
+  const paginationContainer = document.querySelector('#pagination');
+  paginationContainer.addEventListener('click', onLoadPage);
+}
+
+trendMoviesApiServise.fetchMoviesTrend().then(appendMovies).then(renderPagination);
 
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';
@@ -76,14 +84,26 @@ function onSearch(event) {
   moviesApiService.fetchMovies().then(appendMovies);
 }
 
+function onLoadPage(event) {
+  event.preventDefault();
+  if (!event.target.classList.contains('pagination-link')) {
+    return;
+  }
+  trendMoviesApiServise.page = Number(event.target.dataset.value);
+  refs.dataContainer.innerHTML = '';
+  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies).then(renderPagination);
+}
+
 function onLoadMore() {
   trendMoviesApiServise.fetchMoviesTrend().then(appendMovies) ||
     moviesApiService.fetchMovies().then(appendMovies);
 }
 
 function appendMovies(results) {
+  const options = {page: results.page, totalPages: results.totalPages}
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
+  return options;
 }
 
 // Модалка для футера________________________________________________
