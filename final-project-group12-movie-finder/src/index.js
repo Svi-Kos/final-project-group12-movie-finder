@@ -30,6 +30,9 @@ import Natalie from './images/team/Natalie.jpg';
 import Dmytro from './images/team/Dmytro.jpg';
 import Yulia from './images/team/Yuliia.jpg';
 
+import './styles/stylesForSpinner.css';
+import spinnerEl from './js/spinner';
+
 // import paginationTpl from './js/pagination';
 // import paginationSettings from './templates/paginationSettings.json';
 
@@ -69,16 +72,19 @@ trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
 
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';
-
+  spinnerEl.spinner.show();
   const form = event.target;
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
   moviesApiService.fetchMovies().then(appendMovies);
+  spinnerEl.spinner.close();
 }
 
 function onLoadMore() {
+  spinnerEl.spinner.show();
   trendMoviesApiServise.fetchMoviesTrend().then(appendMovies) ||
     moviesApiService.fetchMovies().then(appendMovies);
+  spinnerEl.spinner.close();
 }
 
 function appendMovies(results) {
