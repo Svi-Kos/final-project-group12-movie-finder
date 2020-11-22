@@ -4,7 +4,7 @@ import './styles/stylesForHeader.css';
 import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
-import './styles/stylesForPagination.css'
+import './styles/stylesForPagination.css';
 import ApiService from './js/apiService';
 import './js/modal';
 import cardFilmTpl from './templates/card-film.hbs';
@@ -34,7 +34,6 @@ import Yulia from './images/team/Yuliia.jpg';
 // import paginationTpl from './js/pagination';
 // import paginationSettings from './templates/paginationSettings.json';
 
-
 const headerEl = document.querySelector('.header');
 const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
@@ -44,7 +43,7 @@ const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
 
-const modalMarkup = modal();
+// const modalMarkup = modal();
 
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
@@ -68,12 +67,18 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 function renderPagination({ page, totalPages }) {
   paginationSettings.currentPage = page;
   paginationSettings.totalPages = totalPages;
-  refs.dataContainer.insertAdjacentHTML('beforeend', paginationTpl(paginationSettings));
+  refs.dataContainer.insertAdjacentHTML(
+    'beforeend',
+    paginationTpl(paginationSettings),
+  );
   const paginationContainer = document.querySelector('#pagination');
   paginationContainer.addEventListener('click', onLoadPage);
 }
 
-trendMoviesApiServise.fetchMoviesTrend().then(appendMovies).then(renderPagination);
+trendMoviesApiServise
+  .fetchMoviesTrend()
+  .then(appendMovies)
+  .then(renderPagination);
 
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';
@@ -91,7 +96,10 @@ function onLoadPage(event) {
   }
   trendMoviesApiServise.page = Number(event.target.dataset.value);
   refs.dataContainer.innerHTML = '';
-  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies).then(renderPagination);
+  trendMoviesApiServise
+    .fetchMoviesTrend()
+    .then(appendMovies)
+    .then(renderPagination);
 }
 
 function onLoadMore() {
@@ -100,7 +108,7 @@ function onLoadMore() {
 }
 
 function appendMovies(results) {
-  const options = {page: results.page, totalPages: results.totalPages}
+  const options = { page: results.page, totalPages: results.totalPages };
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
   return options;
