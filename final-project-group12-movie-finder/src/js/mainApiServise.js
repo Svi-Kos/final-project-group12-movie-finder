@@ -1,8 +1,8 @@
 import GenresApiService from './apiGenresName';
-import ApiService from './apiService';
+
 
 const genresNameApi = new GenresApiService();
-const moviesApiService = new ApiService();
+
 
 export default class MainApiService {
   constructor() {
@@ -31,13 +31,7 @@ export default class MainApiService {
         return replacedData;
 
       });
-      // .then((replacedData) => {
-      //   const dataResult = moviesApiService.fetchMovies()
-      //     .then((results) => {
-      //       return sliceDate();
-      //     })
-      //   return dataResult;
-      // });
+   
    
   }
 
@@ -67,8 +61,3 @@ function replaceGenresIdsToNames(genres, results) {
   });
 }
 
-// function sliceDate(release_date) {
-//   const data_years = release_date.slice(0, 4);
-  
-//   return console.log(data_years);
-// }
