@@ -11,7 +11,7 @@ export default class ApiService {
       .then(({ results }) => {
         this.incrementPage();
         results.length = this.resultsPerPage;
-
+        console.log(results);
         return results;
       });
   }
