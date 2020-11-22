@@ -110,7 +110,7 @@ function onLoadMore() {
 function appendMovies(results) {
   const options = { page: results.page, totalPages: results.totalPages };
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
-  console.log(refs.dataContainer.offsetWidth);
+
   return options;
 }
 

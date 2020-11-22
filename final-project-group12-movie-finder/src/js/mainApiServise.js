@@ -11,7 +11,6 @@ export default class MainApiService {
       .then(({ results }) => {
         this.incrementPage();
         results.length = this.resultsPerPage;
-        console.log(results);
 
         return results;
       });
