@@ -19,16 +19,13 @@ const paginationSettings = {
         disable = 'is-disabled';
     }
     if (pagination.type!=="PAGE") {
-    tpl = `<a href="#" class="pagination-${pagination.type}-btn ${disable}" data-value = "${pagination.value}">
-    <svg class="pagination-link pagination-${pagination.type}-icon ${disable}" width="16" height="16" data-value = "${pagination.value}>
-    <use href="../images/${pagination.type}.svg">
-    </use></svg></a>`;
+    tpl = `<a href="#" class="pagination pagination-${pagination.type}-btn ${disable} pagination-link" data-value = "${pagination.value}"></a>`;
     return tpl;
 } else {
     if (pagination.isActive){
         active = 'current-page-btn';
     }
-    tpl = `<a href="#" class="pagination-link pagination-${pagination.type}-btn
+    tpl = `<a href="#" class="pagination pagination-link pagination-${pagination.type}-btn
      ${disable} ${active}" data-value="${pagination.value}">${pagination.value}</a>`;
     return tpl;
 }

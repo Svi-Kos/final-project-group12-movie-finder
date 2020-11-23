@@ -34,8 +34,8 @@ import Yulia from './images/team/Yuliia.jpg';
 import './styles/stylesForSpinner.css';
 import spinnerEl from './js/spinner';
 
-// import paginationTpl from './js/pagination';
-// import paginationSettings from './templates/paginationSettings.json';
+import paginationTpl from './js/pagination';
+import paginationSettings from './templates/paginationSettings.json';
 
 const headerEl = document.querySelector('.header');
 const mainEl = document.querySelector('.main');
@@ -65,7 +65,7 @@ const moviesApiService = new ApiService();
 const trendMoviesApiServise = new MainApiService();
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+// refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function renderPagination({ page, totalPages }) {
   paginationSettings.currentPage = page;
@@ -95,28 +95,33 @@ function onSearch(event) {
 
 function onLoadPage(event) {
   event.preventDefault();
-  if (!event.target.classList.contains('pagination-link')) {
+  if (!event.target.classList.contains('pagination')) {
     return;
   }
   trendMoviesApiServise.page = Number(event.target.dataset.value);
   refs.dataContainer.innerHTML = '';
+  spinnerEl.spinner.show();
   trendMoviesApiServise
     .fetchMoviesTrend()
     .then(appendMovies)
+    .then(renderPagination) ||
+    moviesApiService.fetchMovies()
+    .then(appendMovies)
     .then(renderPagination);
+    spinnerEl.spinner.close(); 
 }
 
 function onLoadMore() {
   spinnerEl.spinner.show();
   trendMoviesApiServise.fetchMoviesTrend().then(appendMovies) ||
-    moviesApiService.fetchMovies().then(appendMovies);
+  moviesApiService.fetchMovies().then(appendMovies);
   spinnerEl.spinner.close();
 }
 
 function appendMovies(results) {
   const options = { page: results.page, totalPages: results.totalPages };
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
-
+console.log(options);
   return options;
 }
 

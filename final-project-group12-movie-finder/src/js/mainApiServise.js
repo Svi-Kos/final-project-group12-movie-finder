@@ -8,10 +8,12 @@ export default class MainApiService {
     const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=14d97542ae4a62e821967220e1ab473a&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
     return fetch(url)
       .then(r => r.json())
-      .then(({ results }) => {
-        this.incrementPage();
+      .then(({ results, total_pages }) => {
+        // this.incrementPage();
         results.length = this.resultsPerPage;
-
+        results.totalPages = total_pages;
+        results.page = this.page;
+        console.log(results);
         return results;
       });
   }
