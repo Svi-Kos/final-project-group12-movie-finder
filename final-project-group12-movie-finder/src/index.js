@@ -109,16 +109,22 @@ function onLoadPage(event) {
 function onLoadMore() {
   spinnerEl.spinner.show();
   trendMoviesApiServise.fetchMoviesTrend().then(appendMovies) ||
-    moviesApiService.fetchMovies().then(appendMovies);
+  moviesApiService.fetchMovies().then(appendMovies);
   spinnerEl.spinner.close();
 }
 
-function appendMovies(results) {
-  const options = { page: results.page, totalPages: results.totalPages };
-  refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
+function appendMovies(replacedData) {
+  const options = { page: replacedData.page, totalPages: replacedData.totalPages };
+  refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(replacedData));
 
-  return options;
+  return console.log(options);
 }
+// function appendMovies(replacedData) {
+
+//   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(replacedData));
+//   console.log(refs.dataContainer.offsetWidth);
+  
+// }
 
 // Модалка для футера________________________________________________
 
