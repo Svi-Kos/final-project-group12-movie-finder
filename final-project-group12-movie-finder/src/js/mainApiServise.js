@@ -24,7 +24,7 @@ export default class MainApiService {
          .then((genres) => {
             return replaceGenresIdsToNames(genres, results);
          });
-        console.log(replacedData);
+        // console.log(replacedData);
         return replacedData;
       });
   }

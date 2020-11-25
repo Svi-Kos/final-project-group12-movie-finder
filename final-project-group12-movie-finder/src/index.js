@@ -51,12 +51,10 @@ footerEl.insertAdjacentHTML('beforeend', footerMarkup);
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
   dataContainer: document.querySelector('.js-data-container'),
-  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
+  // loadMoreBtn: document.querySelector('[data-action="load-more"]'),
 
   modalFooterEl: document.querySelector('.js-team'),
   teamBtn: document.querySelector('.button-team'),
-
-  paginationContainer: document.querySelector('#pagination'),
 };
 
 const moviesApiService = new ApiService();
@@ -64,22 +62,6 @@ const trendMoviesApiServise = new MainApiService();
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 // refs.loadMoreBtn.addEventListener('click', onLoadMore);
-
-refs.paginationContainer.addEventListener('click', onPaginate);
-
-function onPaginate(event) {
-  event.preventDefault();
-  // if (!event.target.classList.contains('.pagination-link')) {
-  //   return;
-  // }
-  paginationSettings.currentPage = Number(event.target.dataset.value);
-  refs.paginationContainer = paginationTpl(paginationSettings);
-  refs.dataContainer.innerHTML = '';
-  moviesApiService.page = Number(event.target.dataset.value);
-  console.log(moviesApiService.page);
-  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
-  moviesApiService.fetchMovies().then(appendMovies);
-}
 
 function renderPagination({ page, totalPages }) {
   paginationSettings.currentPage = page;
@@ -120,19 +102,6 @@ function onLoadPage(event) {
     .then(appendMovies)
     .then(renderPagination);
     spinnerEl.spinner.close();
-}
-
-function onLoadPage(event) {
-  event.preventDefault();
-  if (!event.target.classList.contains('pagination-link')) {
-    return;
-  }
-  trendMoviesApiServise.page = Number(event.target.dataset.value);
-  refs.dataContainer.innerHTML = '';
-  trendMoviesApiServise
-    .fetchMoviesTrend()
-    .then(appendMovies)
-    .then(renderPagination);
 }
 
 function onLoadMore() {
