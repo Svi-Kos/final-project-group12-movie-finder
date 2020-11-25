@@ -8,10 +8,11 @@ export default class ApiService {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=14d97542ae4a62e821967220e1ab473a&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
     return fetch(url)
       .then(r => r.json())
-      .then(({ results }) => {
-        this.incrementPage();
+      .then(({ results, total_pages }) => {
+        // this.incrementPage();
         results.length = this.resultsPerPage;
-        console.log(results);
+        this.totalPages = total_pages;
+        // console.log(results);
         return results;
       });
   }

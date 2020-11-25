@@ -30,13 +30,10 @@ import Dasha from './images/team/Dasha.jpg';
 import Natalie from './images/team/Natalie.jpg';
 import Dmytro from './images/team/Dmytro.jpg';
 import Yulia from './images/team/Yuliia.jpg';
-
+import paginationTpl from './js/pagination';
+import paginationSettings from './templates/paginationSettings.json';
 import './styles/stylesForSpinner.css';
 import spinnerEl from './js/spinner';
-
-// import paginationTpl from './js/pagination';
-// import paginationSettings from './templates/paginationSettings.json';
-
 const headerEl = document.querySelector('.header');
 const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
@@ -45,7 +42,6 @@ const modalEl = document.querySelector('.modal');
 const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
-
 // const modalMarkup = modal();
 
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
@@ -59,13 +55,31 @@ const refs = {
 
   modalFooterEl: document.querySelector('.js-team'),
   teamBtn: document.querySelector('.button-team'),
+
+  paginationContainer: document.querySelector('#pagination'),
 };
 
 const moviesApiService = new ApiService();
 const trendMoviesApiServise = new MainApiService();
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+// refs.loadMoreBtn.addEventListener('click', onLoadMore);
+
+refs.paginationContainer.addEventListener('click', onPaginate);
+
+function onPaginate(event) {
+  event.preventDefault();
+  // if (!event.target.classList.contains('.pagination-link')) {
+  //   return;
+  // }
+  paginationSettings.currentPage = Number(event.target.dataset.value);
+  refs.paginationContainer = paginationTpl(paginationSettings);
+  refs.dataContainer.innerHTML = '';
+  moviesApiService.page = Number(event.target.dataset.value);
+  console.log(moviesApiService.page);
+  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+  moviesApiService.fetchMovies().then(appendMovies);
+}
 
 function renderPagination({ page, totalPages }) {
   paginationSettings.currentPage = page;
@@ -100,6 +114,21 @@ function onLoadPage(event) {
   }
   trendMoviesApiServise.page = Number(event.target.dataset.value);
   refs.dataContainer.innerHTML = '';
+  spinnerEl.spinner.show();
+  trendMoviesApiServise
+    .fetchMoviesTrend()
+    .then(appendMovies)
+    .then(renderPagination);
+    spinnerEl.spinner.close();
+}
+
+function onLoadPage(event) {
+  event.preventDefault();
+  if (!event.target.classList.contains('pagination-link')) {
+    return;
+  }
+  trendMoviesApiServise.page = Number(event.target.dataset.value);
+  refs.dataContainer.innerHTML = '';
   trendMoviesApiServise
     .fetchMoviesTrend()
     .then(appendMovies)
@@ -114,10 +143,10 @@ function onLoadMore() {
 }
 
 function appendMovies(replacedData) {
-  const options = { page: replacedData.page, totalPages: replacedData.totalPages };
+  const options = { page: trendMoviesApiServise.page, totalPages: trendMoviesApiServise.totalPages };
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(replacedData));
-
-  return console.log(options);
+  // console.log(options);
+  return options;
 }
 // function appendMovies(replacedData) {
 

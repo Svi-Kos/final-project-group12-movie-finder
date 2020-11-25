@@ -1,3 +1,4 @@
+  
 import ultimatePagination from 'ultimate-pagination';
 const paginationSettings = {
     // Required
@@ -10,6 +11,7 @@ const paginationSettings = {
     hidePreviousAndNextPageLinks: false,
     hideFirstAndLastPageLinks: true,
   }
+
   export default function paginationTpl(options) {
     const pagination = ultimatePagination.getPaginationModel(options).map(pagination => {
     let tpl;
@@ -19,10 +21,7 @@ const paginationSettings = {
         disable = 'is-disabled';
     }
     if (pagination.type!=="PAGE") {
-    tpl = `<a href="#" class="pagination-${pagination.type}-btn ${disable}" data-value = "${pagination.value}">
-    <svg class="pagination-link pagination-${pagination.type}-icon ${disable}" width="16" height="16" data-value = "${pagination.value}>
-    <use href="../images/${pagination.type}.svg">
-    </use></svg></a>`;
+    tpl = `<a href="#" class="pagination pagination-${pagination.type}-btn ${disable} pagination-link" data-value = "${pagination.value}"></a>`;
     return tpl;
 } else {
     if (pagination.isActive){
@@ -34,5 +33,4 @@ const paginationSettings = {
 }
 }).join('');
 return `<div id="pagination" class="pagination-container">${pagination}</div>`;
-  }
-//   console.log(ultimatePagination.getPaginationModel(paginationSettings));
+}

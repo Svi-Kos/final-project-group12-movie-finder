@@ -7,15 +7,16 @@ export default class MainApiService {
     this.searchQuery = '';
     this.page = 1;
     this.resultsPerPage = 12;
+    this.totalPages = 1;
   }
   fetchMoviesTrend() {
     const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=14d97542ae4a62e821967220e1ab473a&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
     return fetch(url)
       .then(r => r.json())
-      .then(({ results }) => {
-        this.incrementPage();
+      .then(({ results, total_pages }) => {
+        // this.incrementPage();
         results.length = this.resultsPerPage;
-
+        this.totalPages = total_pages;
         return results;
       })
       .then((results) => {

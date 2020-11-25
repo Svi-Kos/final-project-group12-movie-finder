@@ -6,9 +6,6 @@ export default class GenresApiService {
         return fetch(url)
             .then(r => r.json())
             .then(({ genres }) => {
-                
-                console.log(genres);
-
                 return genres;
             });
     }
