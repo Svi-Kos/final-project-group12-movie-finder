@@ -180,7 +180,7 @@ refsHeader.pageMyLibraryRef.addEventListener('click', onLibraryClick);
 refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
 function onLibraryClick(event) {
-  refsHeader.loadMore.classList.add('is-hidden')
+  // refsHeader.loadMore.classList.add('is-hidden')
   refsHeader.pageMyLibraryRef.classList.add('is-active');
 
   refsHeader.pageHomeRef.classList.remove('is-active');

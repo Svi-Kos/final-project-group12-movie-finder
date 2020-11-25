@@ -4,7 +4,7 @@ const list = document.querySelector('.js-data-container');
 const watchedBtn = document.querySelector('.libr-watched');
 const queueBtn = document.querySelector('.libr-queue');
 const modal = document.querySelector('.modal');
-const loadMoreBtn = document.querySelector('[data-action="load-more"]');
+// const loadMoreBtn = document.querySelector('[data-action="load-more"]');
 let arrayWatched = [];
 let arrayQueue = [];
 
@@ -60,7 +60,7 @@ watchedBtn.addEventListener('click', function () {
     li.insertAdjacentHTML('beforeend', innerHTML);
     watchedList.appendChild(li);
   }
-  loadMoreBtn.style.visibility = 'hidden';
+  // loadMoreBtn.style.visibility = 'hidden';
 });
 
 queueBtn.addEventListener('click', function () {
@@ -85,7 +85,7 @@ queueBtn.addEventListener('click', function () {
     li.insertAdjacentHTML('beforeend', innerHTML);
     queueList.appendChild(li);
   }
-  loadMoreBtn.style.visibility = 'hidden';
+  // loadMoreBtn.style.visibility = 'hidden';
 });
 
 myLibraryBtn.addEventListener('click', function () {
@@ -131,5 +131,5 @@ myLibraryBtn.addEventListener('click', function () {
     li.insertAdjacentHTML('beforeend', innerHTML);
     watchedList.appendChild(li);
   }
-  loadMoreBtn.style.visibility = 'hidden';
+  // loadMoreBtn.style.visibility = 'hidden';
 });
