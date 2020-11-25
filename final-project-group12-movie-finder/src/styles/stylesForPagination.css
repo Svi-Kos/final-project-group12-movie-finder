@@ -1,0 +1,61 @@
+/* `<a href="#" class="pagination-${pagination.type}-btn ${disable}" data-value = "${pagination.value}"><svg class="pagination-link pagination-${pagination.type}-icon ${disable}" width="16" height="16"><use href="../images/${pagination.type}.svg"></use></svg></a>`; */
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.is-disabled {
+    pointer-events: none;
+}
+
+.pagination-link {
+    display: inline-block;
+    width: 40px; 
+    height: 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: black;
+} 
+
+.pagination-PREVIOUS_PAGE_LINK-btn {
+    background-color: #F7F7F7;
+    background-image: url(../images/arrow-left.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pagination-NEXT_PAGE_LINK-btn {
+    background-color: #F7F7F7;
+    background-image: url(../images/arrow-right.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pagination-ELLIPSIS-btn {
+    background-color: #F7F7F7;
+    background-image: url(../images/ellipsis.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pagination-link:hover, .pagination-link:focus {
+    border: 1px solid #FF6B08;
+}
+
+.pagination-PAGE-btn  {
+padding-top: 13px;
+}
+
+.current-page-btn {
+    background-color: #FF6B08;
+    color: #FFFFFF;
+}

@@ -30,6 +30,12 @@ import Natalie from './images/team/Natalie.jpg';
 import Dmytro from './images/team/Dmytro.jpg';
 import Yulia from './images/team/Yuliia.jpg';
 
+<<<<<<< Updated upstream
+=======
+import './styles/stylesForSpinner.css';
+import spinnerEl from './js/spinner';
+
+>>>>>>> Stashed changes
 import paginationTpl from './js/pagination';
 import paginationSettings from './templates/paginationSettings.json';
 
@@ -63,7 +69,7 @@ const moviesApiService = new ApiService();
 const trendMoviesApiServise = new MainApiService();
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500));
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+// refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 refs.paginationContainer.addEventListener('click', onPaginate);
 
@@ -90,6 +96,25 @@ function onSearch(event) {
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
   moviesApiService.fetchMovies().then(appendMovies);
+<<<<<<< Updated upstream
+=======
+  spinnerEl.spinner.close();
+}
+
+function onLoadPage(event) {
+  event.preventDefault();
+  if (!event.target.classList.contains('pagination-link')) {
+    return;
+  }
+  trendMoviesApiServise.page = Number(event.target.dataset.value);
+  refs.dataContainer.innerHTML = '';
+  spinnerEl.spinner.show();
+  trendMoviesApiServise
+    .fetchMoviesTrend()
+    .then(appendMovies)
+    .then(renderPagination);
+    spinnerEl.spinner.close();
+>>>>>>> Stashed changes
 }
 
 function onLoadMore() {
@@ -98,9 +123,17 @@ function onLoadMore() {
   moviesApiService.fetchMovies().then(appendMovies);
 }
 
+<<<<<<< Updated upstream
 function appendMovies(results) {
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
   console.log(refs.dataContainer.offsetWidth);
+=======
+function appendMovies(replacedData) {
+  const options = { page: trendMoviesApiServise.page, totalPages: trendMoviesApiServise.totalPages };
+  refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(replacedData));
+  // console.log(options);
+  return options;
+>>>>>>> Stashed changes
 }
 
 // Модалка для футера________________________________________________
