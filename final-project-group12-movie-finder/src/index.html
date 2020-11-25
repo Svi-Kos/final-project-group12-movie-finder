@@ -10,7 +10,7 @@
     <header class="header">
       <div class="container">
         <div class="header-top">
-          <a href="./index.html" class="logo" data-nav-choice="home">
+          <a href="./index.html" class="logo">
             <img
               src="./images/logo.svg"
               alt="company logo"
@@ -30,7 +30,10 @@
                 </a>
               </li>
               <li class="nav-item">
-                <button class="nav-link" data-nav-choice="my-library">
+                <button
+                  class="nav-link my-library"
+                  data-nav-choice="my-library"
+                >
                   MY LIBRARY
                 </button>
               </li>
@@ -68,7 +71,7 @@
       <ul class="data js-data-container"></ul>
       <!-- <button
         type="button"
-        class="btn btn-primary button"
+        class="btn btn-primary button btn-load-more"
         data-action="load-more"
       >
         <span class="label">Load more</span>
@@ -76,6 +79,11 @@
     </main>
     <footer class="footer"></footer>
 
-    <div class="modal backdrop is-hidden" data-modal></div>
+
+    <div class="modal is-hidden" data-modal>
+      <div class="backdrop"></div>
+    </div>
+
+
   </body>
 </html>

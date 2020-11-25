@@ -4,6 +4,7 @@ import './styles/stylesForHeader.css';
 import './styles/stylesForMain.css';
 import './styles/stylesForFooter.css';
 import './styles/stylesForModal.css';
+import './styles/stylesForPagination.css';
 import ApiService from './js/apiService';
 import './js/modal';
 import cardFilmTpl from './templates/card-film.hbs';
@@ -12,7 +13,7 @@ import MainApiService from './js/mainApiServise';
 import header from './partials/header.hbs';
 import main from './partials/main.hbs';
 import footer from './partials/footer.hbs';
-import modal from './templates/modal.hbs';
+// import modal from './templates/modal.hbs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { alert, defaultModules } from '@pnotify/core';
@@ -29,16 +30,10 @@ import Dasha from './images/team/Dasha.jpg';
 import Natalie from './images/team/Natalie.jpg';
 import Dmytro from './images/team/Dmytro.jpg';
 import Yulia from './images/team/Yuliia.jpg';
-
-<<<<<<< Updated upstream
-=======
-import './styles/stylesForSpinner.css';
-import spinnerEl from './js/spinner';
-
->>>>>>> Stashed changes
 import paginationTpl from './js/pagination';
 import paginationSettings from './templates/paginationSettings.json';
-
+import './styles/stylesForSpinner.css';
+import spinnerEl from './js/spinner';
 const headerEl = document.querySelector('.header');
 const mainEl = document.querySelector('.main');
 const footerEl = document.querySelector('.footer');
@@ -47,12 +42,11 @@ const modalEl = document.querySelector('.modal');
 const headerMarkup = header();
 // const mainMarkup = main();
 const footerMarkup = footer();
-const modalMarkup = modal();
-const paginationContainerString = '<div id="pagination" class="pagination-container">'+paginationTpl(paginationSettings)+'</div>';
+// const modalMarkup = modal();
+
 headerEl.insertAdjacentHTML('beforeend', headerMarkup);
-mainEl.insertAdjacentHTML('beforeend', paginationContainerString);
 footerEl.insertAdjacentHTML('beforeend', footerMarkup);
-modalEl.insertAdjacentHTML('beforeend', modalMarkup);
+// modalEl.insertAdjacentHTML('beforeend', modalMarkup);
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
@@ -87,17 +81,29 @@ function onPaginate(event) {
   moviesApiService.fetchMovies().then(appendMovies);
 }
 
-// trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
+function renderPagination({ page, totalPages }) {
+  paginationSettings.currentPage = page;
+  paginationSettings.totalPages = totalPages;
+  refs.dataContainer.insertAdjacentHTML(
+    'beforeend',
+    paginationTpl(paginationSettings),
+  );
+  const paginationContainer = document.querySelector('#pagination');
+  paginationContainer.addEventListener('click', onLoadPage);
+}
+
+trendMoviesApiServise
+  .fetchMoviesTrend()
+  .then(appendMovies)
+  .then(renderPagination);
 
 function onSearch(event) {
   refs.dataContainer.innerHTML = '';
-  
+  spinnerEl.spinner.show();
   const form = event.target;
   moviesApiService.query = form.value;
   moviesApiService.resetPage();
   moviesApiService.fetchMovies().then(appendMovies);
-<<<<<<< Updated upstream
-=======
   spinnerEl.spinner.close();
 }
 
@@ -114,27 +120,40 @@ function onLoadPage(event) {
     .then(appendMovies)
     .then(renderPagination);
     spinnerEl.spinner.close();
->>>>>>> Stashed changes
+}
+
+function onLoadPage(event) {
+  event.preventDefault();
+  if (!event.target.classList.contains('pagination-link')) {
+    return;
+  }
+  trendMoviesApiServise.page = Number(event.target.dataset.value);
+  refs.dataContainer.innerHTML = '';
+  trendMoviesApiServise
+    .fetchMoviesTrend()
+    .then(appendMovies)
+    .then(renderPagination);
 }
 
 function onLoadMore() {
-  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies);
-
+  spinnerEl.spinner.show();
+  trendMoviesApiServise.fetchMoviesTrend().then(appendMovies) ||
   moviesApiService.fetchMovies().then(appendMovies);
+  spinnerEl.spinner.close();
 }
 
-<<<<<<< Updated upstream
-function appendMovies(results) {
-  refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(results));
-  console.log(refs.dataContainer.offsetWidth);
-=======
 function appendMovies(replacedData) {
   const options = { page: trendMoviesApiServise.page, totalPages: trendMoviesApiServise.totalPages };
   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(replacedData));
   // console.log(options);
   return options;
->>>>>>> Stashed changes
 }
+// function appendMovies(replacedData) {
+
+//   refs.dataContainer.insertAdjacentHTML('beforeend', cardFilmTpl(replacedData));
+//   console.log(refs.dataContainer.offsetWidth);
+  
+// }
 
 // Модалка для футера________________________________________________
 
@@ -175,9 +194,9 @@ function onOverlayClick(event) {
 
 // header buttons switches by Dasha
 
-
 const refsHeader = {
   header: document.querySelector('.header'),
+  loadMore: document.querySelector(".btn-load-more"),
   searchInfo: document.querySelector('#notify-text'),
   searchIconRef: document.querySelector('.search-icon'),
   pageHomeRef: document.querySelector(`[data-nav-choice="home"]`),
@@ -188,15 +207,12 @@ const refsHeader = {
   inputSearchRef: document.querySelector('.search-field'),
 };
 
+refsHeader.pageMyLibraryRef.addEventListener('click', onLibraryClick);
+refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
-refsHeader.pageMyLibraryRef.addEventListener("click", onLibraryClick);
-refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
-  
-  
-
-  function onLibraryClick(event) {
-   
-  refsHeader.pageMyLibraryRef.classList.add("is-active");
+function onLibraryClick(event) {
+  refsHeader.loadMore.classList.add('is-hidden')
+  refsHeader.pageMyLibraryRef.classList.add('is-active');
 
   refsHeader.pageHomeRef.classList.remove('is-active');
 
@@ -208,23 +224,18 @@ refsHeader.pageHomeRef.addEventListener("click", onHomeClick);
   refsHeader.searchIconRef.classList.add('not-visible');
 }
 
-
 refsHeader.pageHomeRef.addEventListener('click', onHomeClick);
 
-
-
 function onHomeClick(event) {
+  refsHeader.loadMore.classList.remove('is-hidden')
   refsHeader.pageHomeRef.classList.add('is-active');
   refsHeader.pageMyLibraryRef.classList.remove('is-active');
 
   refsHeader.buttonListRef.classList.add('not-visible');
   refsHeader.header.className = 'header';
 
-
   refsHeader.inputSearchRef.classList.remove('not-visible');
   refsHeader.searchIconRef.classList.remove('not-visible');
 }
 
-import './js/local-storage.js'
-
-
+import './js/local-storage.js';

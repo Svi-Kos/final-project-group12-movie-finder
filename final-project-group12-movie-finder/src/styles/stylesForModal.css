@@ -122,6 +122,9 @@
 }
 
 .button {
+  display: inline-block;
+  margin-top: 10px;
+
   width: 130px;
   height: 44px;
   border: 0;
@@ -132,6 +135,12 @@
   text-transform: uppercase;
   border: 1px solid #000000;
   background-color: #ffffff;
+
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .button-watched {

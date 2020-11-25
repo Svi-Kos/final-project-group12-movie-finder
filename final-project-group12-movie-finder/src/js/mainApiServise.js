@@ -1,3 +1,7 @@
+import GenresApiService from './apiGenresName';
+
+const genresNameApi = new GenresApiService();
+
 export default class MainApiService {
   constructor() {
     this.searchQuery = '';
@@ -6,22 +10,13 @@ export default class MainApiService {
     this.totalPages = 1;
   }
   fetchMoviesTrend() {
-    const url = `https://api.themoviedb.org/3/trending/all/day?api_key=14d97542ae4a62e821967220e1ab473a&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
+    const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=14d97542ae4a62e821967220e1ab473a&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
     return fetch(url)
       .then(r => r.json())
-<<<<<<< Updated upstream
-      .then(({ results }) => {
-        // this.incrementPage();
-        results.length = this.resultsPerPage;
-        console.log(results);
-
-        return results;
-=======
       .then(({ results, total_pages }) => {
         // this.incrementPage();
         results.length = this.resultsPerPage;
         this.totalPages = total_pages;
-// console.log(results);
         return results;
       })
       .then((results) => {
@@ -29,8 +24,8 @@ export default class MainApiService {
          .then((genres) => {
             return replaceGenresIdsToNames(genres, results);
          });
+        console.log(replacedData);
         return replacedData;
->>>>>>> Stashed changes
       });
   }
 
@@ -46,4 +41,14 @@ export default class MainApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+}
+
+function replaceGenresIdsToNames(genres, results) {
+  return results.map(({ genre_ids, ...otherProps }) => {
+    const genre_names = genre_ids.map((genreId) => {
+      const { name } = genres.find(({ id }) => id === genreId);
+      return name;
+    });
+    return { ...otherProps, genre_names };
+  });
 }
